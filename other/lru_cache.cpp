@@ -51,7 +51,6 @@ class LRUCache {
 			cap = capa;
 			head = NULL;
 			tail = NULL;
-			dict = unordered_map<int, pair<string, Node*>>();
 		}
 		
 		void print() {

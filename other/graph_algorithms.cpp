@@ -1,3 +1,5 @@
+// Implementation of various graph algorithms - topological sort (recursive and iterative), BFS, DFS
+
 #include <iostream>
 #include <stack>
 #include <vector>

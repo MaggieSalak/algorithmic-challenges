@@ -1,3 +1,5 @@
+// Calculator for math expressions in RPN (Reverse Polish Notation)
+
 #include <iostream>
 #include <sstream>
 #include <stack>

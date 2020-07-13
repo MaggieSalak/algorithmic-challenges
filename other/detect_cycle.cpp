@@ -1,3 +1,5 @@
+// Detect if a directed graph contains a cycle
+
 #include <iostream>
 #include <queue>
 #include <stack>

@@ -1,5 +1,7 @@
 class Solution {
 public:
+    
+    // get map of edges where edge -> set of all neighbors
     unordered_map<int, unordered_set<int>> getEdgeMap(int n, const vector<vector<int>>& edges) {
         unordered_map<int, unordered_set<int>> edgeMap;
         for (int i = 0; i < n-1; ++i) {
@@ -10,6 +12,7 @@ public:
         return edgeMap;
     }
     
+    // traverse the tree to find its height 
     void dfs(int cur, unordered_map<int, unordered_set<int>>& edgeMap, vector<bool>& vis, int height, int& maxHeight) {
         vis[cur] = true;
         maxHeight = max(maxHeight, height);
@@ -20,6 +23,7 @@ public:
         }
     }
     
+    // get height of the tree given starting node and edges
     int getHeight(int i, int n, unordered_map<int, unordered_set<int>>& edgeMap) {
         int maxHeight = 0;
         vector<bool> vis(n, false);

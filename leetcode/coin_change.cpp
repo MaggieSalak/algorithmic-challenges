@@ -32,20 +32,18 @@ public:
     }
 };
 
-// 2: With dynamic programming, complexity O(Amount * CoinCount^2)
+// 2: With dynamic programming, complexity O(Amount * CoinCount)
 
 class Solution {
 public:
-    int getMin(const vector<int>& v) {
-        int res = -1;
-        for (auto val : v) {
-            if (res == -1) {
-                res = val;
-            } else if (val != -1) {
-                res = min(res, val);
-            }
+    int getMin(int curVal, int newVal) {
+        if (curVal == -1) {
+            return newVal;
         }
-        return res;
+        if (newVal == -1) {
+            return curVal;
+        }
+        return min(curVal, newVal);
     }
     
     int coinChange(vector<int>& coins, int amount) {
@@ -55,24 +53,28 @@ public:
         
         int coinCount = coins.size();
         vector<vector<int>> val(amount+1, vector<int>(coinCount, -1));
+        vector<int> minCoinCounts(amount+1, -1);
         
         for (int value = 1; value <= amount; ++value) {
+            int minCoinCount = -1;
+            
             for (int coinIndex = 0; coinIndex < coinCount; ++coinIndex) {
                 int coin = coins[coinIndex];
                 if (value - coin == 0) {
                     val[value][coinIndex] = 1;
                 } else if (value - coin > 0) {
-                    int mn = getMin(val[value - coin]);
+                    int mn = minCoinCounts[value - coin];
                     if (mn == -1) {
                         val[value][coinIndex] = -1;
                     } else {
                         val[value][coinIndex] = mn + 1;
                     }
                 }
-                
+                minCoinCount = getMin(minCoinCount, val[value][coinIndex]);
             }
+            minCoinCounts[value] = minCoinCount;
         }
         
-        return getMin(val[amount]);
+        return minCoinCounts[amount];
     }
 };

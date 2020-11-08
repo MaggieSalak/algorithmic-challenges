@@ -32,7 +32,7 @@ public:
     }
 };
 
-// 2: With dynamic programming
+// 2: With dynamic programming, complexity O(Amount * CoinCount^2)
 
 class Solution {
 public:

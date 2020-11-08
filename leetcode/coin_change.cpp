@@ -74,7 +74,6 @@ public:
             }
             minCoinCounts[value] = minCoinCount;
         }
-        
         return minCoinCounts[amount];
     }
 };

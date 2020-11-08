@@ -1,3 +1,5 @@
+// 1: With recursion
+
 class Solution {
 public:
     
@@ -27,5 +29,50 @@ public:
         int minCoins = -1;
         calc(coins, coins.size() - 1, amount, 0, minCoins);
         return minCoins;
+    }
+};
+
+// 2: With dynamic programming
+
+class Solution {
+public:
+    int getMin(const vector<int>& v) {
+        int res = -1;
+        for (auto val : v) {
+            if (res == -1) {
+                res = val;
+            } else if (val != -1) {
+                res = min(res, val);
+            }
+        }
+        return res;
+    }
+    
+    int coinChange(vector<int>& coins, int amount) {
+        if (amount == 0) {
+            return 0;
+        }
+        
+        int coinCount = coins.size();
+        vector<vector<int>> val(amount+1, vector<int>(coinCount, -1));
+        
+        for (int value = 1; value <= amount; ++value) {
+            for (int coinIndex = 0; coinIndex < coinCount; ++coinIndex) {
+                int coin = coins[coinIndex];
+                if (value - coin == 0) {
+                    val[value][coinIndex] = 1;
+                } else if (value - coin > 0) {
+                    int mn = getMin(val[value - coin]);
+                    if (mn == -1) {
+                        val[value][coinIndex] = -1;
+                    } else {
+                        val[value][coinIndex] = mn + 1;
+                    }
+                }
+                
+            }
+        }
+        
+        return getMin(val[amount]);
     }
 };

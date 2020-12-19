@@ -89,7 +89,6 @@ int HashSet::count() {
 
 bool HashSet::contains(int val) {
 	int index = val % v.size();
-	// cout << val << " " << v.size() << " " << index << endl;
 	Node* n = v[index];
 	while (n != NULL) {
 		if (n->value == val)
@@ -101,12 +100,12 @@ bool HashSet::contains(int val) {
 
 void HashSet::resize() {
 	vector<Node*> old = v;
-	vector<Node*> newV(2 * old.size());
-	v = newV;
+	v = vector<Node*>(2 * old.size());
+	
 	for (int i = 0; i < old.size(); ++i) {
 		Node* n = old[i];
 		while (n != NULL) {
-			insert(n->value);
+			insertValue(n->value);
 			n = n->next;
 		}
 	}
@@ -121,5 +120,5 @@ void HashSet::print() {
 		}
 		cout << endl;
 	}
-	cout << "end" << endl;
+	cout << "size " << v.size() << endl;
 }
